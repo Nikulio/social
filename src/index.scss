@@ -1,0 +1,57 @@
+@import "./shared/colors";
+
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+a {
+  color: $water;
+  font-size: 14px;
+  text-transform: lowercase;
+}
+
+.form {
+  max-width: 480px;
+  width: 100%;
+  .input-wrap {
+    position: relative;
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      height: 40px;
+      padding-left: 100px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    label {
+      font-size: 12px;
+      text-transform: lowercase;
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  transition: .3s all;
+  background: $water;
+  color: $white;
+  outline: none;
+  border: 1px solid $water;
+  &:hover {
+    background: $white;
+    color: $water;
+    cursor: pointer;
+  }
+}
+
