@@ -23,16 +23,20 @@ Router.route("/add/").post(function (req, res) {
 });
 
 Router.route("/login/").post(function (req, res) {
-    UserSchema.find({login : req.body.login}).then((data) => {
-        console.log("--- serv", data[0].password);
-        bcrypt.compare(req.body.password, data[0].password, function(err, res) {
-            if(res) {
-                console.log("--- good")
-            } else {
-                console.log("--- dick");
-                // Passwords don't match
+    UserSchema.find({login: req.body.login}).then(
+        (data) => {
+            if (data.length === 0) {
+                console.log("--- fuck you", );
+                return false
             }
-        });
-    });
+            bcrypt.compare(req.body.password, data[0].password, function (err, res) {
+                if (res) {
+                    console.log("--- good")
+                } else {
+                    console.log("--- dick");
+                }
+            });
+        }
+    )
 });
 module.exports = Router;

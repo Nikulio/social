@@ -22,8 +22,17 @@ a {
       width: 100%;
       height: 40px;
       padding-left: 100px;
+      transition: .3s all;
       font-size: 15px;
+      border: 1px solid transparent;
       box-sizing: border-box;
+      &.error {
+        border: 1px solid $red;
+      }
+      &:focus {
+        outline: none;
+        border: 1px solid $water;
+      }
     }
     label {
       font-size: 12px;
@@ -34,6 +43,13 @@ a {
       transform: translateY(-50%);
     }
   }
+}
+
+.error-text {
+  color: $red;
+  font-size: 12px;
+  text-transform: lowercase;
+  width: 100%;
 }
 
 .btn {
