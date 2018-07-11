@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 const cors = require("cors");
 const path = require("path")
+const socketIO = require("socket.io")
 const mongoose = require("mongoose")
 const http = require("http")
 
@@ -21,10 +23,22 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use("/api", Router);
 app.use(express.static(buildPath));
 
 const server = http.createServer(app);
+const io = socketIO(server)
+io.on('connection', socket => {
+    console.log('User connected')
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+    })
+})
+
+app.io = io;
+
 
 server.listen(PORT, () => {
     console.log("--- server is successfully up at: ", PORT);

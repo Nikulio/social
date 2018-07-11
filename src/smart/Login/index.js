@@ -3,28 +3,37 @@ import {connect} from 'react-redux';
 import {withRouter, Link} from "react-router-dom";
 import { Field, reduxForm } from 'redux-form'
 
+import field, {required} from "../../shared/validation";
 import "./index.css"
 import {loginUser} from "../../actions";
 
 
 let LoginForm = props => {
-    const { handleSubmit } = props
+    const { handleSubmit, userError } = props
     return (
         <form onSubmit={handleSubmit} className="login-form form">
-            <div className="input-wrap">
-                <label htmlFor="login">Login</label>
-                <Field name="login" component="input" type="text" />
-            </div>
-            <div className="input-wrap">
-                <label htmlFor="password">Password</label>
-                <Field name="password" component="input" type="password" />
-            </div>
+            <Field name="login" type="text"
+                   component={field} label="Login"
+                   validate={[required]}
+            />
+            <Field name="password" type="password"
+                   component={field} label="Password"
+                   validate={[required]}
+            />
+            {userError && (
+                <div className="input-wrap">
+                    <div className="error-text">Bad login/password</div>
+                </div>
+            )}
             <div className="input-wrap">
                 <Link to="/registration">New? Create SocAccount</Link>
             </div>
+
             <div className="input-wrap">
                 <button className="btn" type="submit">Submit</button>
             </div>
+
+
         </form>
     )
 }
@@ -35,15 +44,16 @@ LoginForm = reduxForm({
 })(LoginForm)
 
 class Login extends Component {
-    
     submit = (data) => {
         this.props.loginUser(data);
     }
-    
     render() {
+        const {userError} = this.props;
+        console.log("--- userErr", this.props);
         return (
             <div className="login">
-                <LoginForm onSubmit={this.submit} />
+                <LoginForm userError={userError} onSubmit={this.submit} />
+
             </div>
         );
     }
