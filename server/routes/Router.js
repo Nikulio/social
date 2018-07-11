@@ -4,15 +4,6 @@ const path = require("path");
 const UserSchema = require("../models/UserSchema");
 const bcrypt = require('bcrypt');
 
-// bcrypt.compare(req.body.password, hash, function(err, res) {
-//     if(res) {
-//         console.log("--- good")
-//     } else {
-//         // Passwords don't match
-//     }
-// });
-
-
 Router.route("/add/").post(function (req, res) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         req.body.password = hash;
@@ -22,18 +13,23 @@ Router.route("/add/").post(function (req, res) {
     });
 });
 
+Router.route("/login/").get(function (req, res) {
+    res.send(req.cookies)
+});
+
+
 Router.route("/login/").post(function (req, res) {
     UserSchema.find({login: req.body.login}).then(
         (data) => {
             if (data.length === 0) {
-                console.log("--- fuck you", );
+                req.app.io.emit('userID', {});
                 return false
             }
-            bcrypt.compare(req.body.password, data[0].password, function (err, res) {
-                if (res) {
-                    console.log("--- good")
+            bcrypt.compare(req.body.password, data[0].password, function (err, userData) {
+                if (userData) {
+                    req.app.io.emit('userID', {userID: data[0].login});
                 } else {
-                    console.log("--- dick");
+                    req.app.io.emit('userID', {});
                 }
             });
         }

@@ -13,6 +13,10 @@ a {
     position: relative; }
     .form .input-wrap:not(:last-of-type) {
       margin-bottom: 20px; }
+    .form .input-wrap.error input {
+      border: 1px solid #ff4311; }
+    .form .input-wrap.error label {
+      color: #ff4311; }
     .form .input-wrap input {
       width: 100%;
       height: 40px;
@@ -21,8 +25,6 @@ a {
       font-size: 15px;
       border: 1px solid transparent;
       box-sizing: border-box; }
-      .form .input-wrap input.error {
-        border: 1px solid #ff4311; }
       .form .input-wrap input:focus {
         outline: none;
         border: 1px solid #88bbd6; }
@@ -31,6 +33,7 @@ a {
       text-transform: lowercase;
       position: absolute;
       left: 20px;
+      transition: .3s all;
       top: 50%;
       transform: translateY(-50%); }
 

@@ -19,10 +19,9 @@ export const aol = value =>
 
 
 const renderField = ({input, label, type, placeholder, meta: {touched, error, warning}}) => (
-    <div className="input-wrap">
+    <div className={touched && error ? "error input-wrap" : "input-wrap"}>
         <label>{label}</label>
         <input {...input}
-               className={touched && error ? "error" : " "}
                placeholder={placeholder}
                type={type}
         />

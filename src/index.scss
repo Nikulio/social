@@ -18,6 +18,14 @@ a {
     &:not(:last-of-type) {
       margin-bottom: 20px;
     }
+    &.error {
+      input {
+        border: 1px solid $red;
+      }
+      label {
+        color: $red;
+      }
+    }
     input {
       width: 100%;
       height: 40px;
@@ -26,9 +34,7 @@ a {
       font-size: 15px;
       border: 1px solid transparent;
       box-sizing: border-box;
-      &.error {
-        border: 1px solid $red;
-      }
+
       &:focus {
         outline: none;
         border: 1px solid $water;
@@ -39,6 +45,7 @@ a {
       text-transform: lowercase;
       position: absolute;
       left: 20px;
+      transition: .3s all;
       top: 50%;
       transform: translateY(-50%);
     }

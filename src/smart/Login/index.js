@@ -9,7 +9,7 @@ import {loginUser} from "../../actions";
 
 
 let LoginForm = props => {
-    const { handleSubmit } = props
+    const { handleSubmit, userError } = props
     return (
         <form onSubmit={handleSubmit} className="login-form form">
             <Field name="login" type="text"
@@ -20,12 +20,20 @@ let LoginForm = props => {
                    component={field} label="Password"
                    validate={[required]}
             />
+            {userError && (
+                <div className="input-wrap">
+                    <div className="error-text">Bad login/password</div>
+                </div>
+            )}
             <div className="input-wrap">
                 <Link to="/registration">New? Create SocAccount</Link>
             </div>
+
             <div className="input-wrap">
                 <button className="btn" type="submit">Submit</button>
             </div>
+
+
         </form>
     )
 }
@@ -40,9 +48,12 @@ class Login extends Component {
         this.props.loginUser(data);
     }
     render() {
+        const {userError} = this.props;
+        console.log("--- userErr", this.props);
         return (
             <div className="login">
-                <LoginForm onSubmit={this.submit} />
+                <LoginForm userError={userError} onSubmit={this.submit} />
+
             </div>
         );
     }
