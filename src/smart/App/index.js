@@ -8,7 +8,15 @@ import Login from "../Login";
 import Registration from "../Registration";
 import Home from "../Home";
 import history from "../../history";
+const storage = window.localStorage
 
+const Wrapper = (props) => {
+    return (
+        <div className="wrapper">
+            {props.children}
+        </div>
+    )
+}
 
 class App extends Component {
 
@@ -19,14 +27,13 @@ class App extends Component {
 
     componentDidMount() {
         const socket = socketIOClient(this.state.endpoint)
-        const storage = window.localStorage;
-        const userID = localStorage.getItem('userID');
+        const userID = storage.getItem('userID');
 
         socket.on('userID', (data) => {
             console.log("--- kek", data);
             if (Object.keys(data).length > 0) {
                 console.log("--- lol", );
-                storage.setItem("userID", data.userID)
+                storage.setItem("userID", JSON.stringify(data))
                 history.push("/")
             } else {
                 console.log("--- sdfsd");
@@ -44,16 +51,15 @@ class App extends Component {
     }
 
     render() {
-        console.log("--- this.state.userError", this.state.userError);
         return (
-            <div>
+            <Wrapper storage={storage}>
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/login"
                            render={ () => <Login userError={this.state.userError} /> }/>
                     <Route path="/registration" component={Registration}/>;
                 </Switch>
-            </div>
+            </Wrapper>
         );
     }
 }
