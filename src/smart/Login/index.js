@@ -49,11 +49,9 @@ class Login extends Component {
     }
     render() {
         const {userError} = this.props;
-        console.log("--- userErr", this.props);
         return (
             <div className="login">
                 <LoginForm userError={userError} onSubmit={this.submit} />
-
             </div>
         );
     }

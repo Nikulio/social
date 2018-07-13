@@ -13,11 +13,6 @@ Router.route("/add/").post(function (req, res) {
     });
 });
 
-Router.route("/login/").get(function (req, res) {
-    res.send(req.cookies)
-});
-
-
 Router.route("/login/").post(function (req, res) {
     UserSchema.find({login: req.body.login}).then(
         (data) => {
@@ -27,6 +22,7 @@ Router.route("/login/").post(function (req, res) {
             }
             bcrypt.compare(req.body.password, data[0].password, function (err, userData) {
                 if (userData) {
+                    console.log("--- data", data);
                     req.app.io.emit('userID', {userID: data[0].login});
                 } else {
                     req.app.io.emit('userID', {});
