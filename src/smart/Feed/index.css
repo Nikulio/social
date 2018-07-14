@@ -1,6 +1,30 @@
 .feed {
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto; }
+
+.posts {
+  width: 100%; }
+  .posts .posts__post {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    transition: .3s all;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1); }
+    .posts .posts__post .posts__post-title {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 10px; }
+    .posts .posts__post .posts__post-text {
+      font-size: 16px; }
+    .posts .posts__post:hover {
+      cursor: pointer;
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2); }
+    .posts .posts__post:not(:last-of-type) {
+      margin-bottom: 20px; }
 
 /*# sourceMappingURL=index.css.map */

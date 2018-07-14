@@ -1,23 +1,42 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import NewPost from "./NewPost";
-import {withRouter} from "react-router-dom";
-import "./index.css"
+import { withRouter } from "react-router-dom";
+import { fetchPosts } from "../../actions";
+import "./index.css";
 
 class Feed extends Component {
-    render() {
+  displayPosts = () => {
+    const { posts } = this.props.user;
+    return posts && posts.length > 0 ? (
+      posts.map((elem) => {
         return (
-            <div className="feed">
-                <NewPost />
-            </div>
+          <div className="posts__post" key={elem.key}>
+            <div className="posts__post-title">{elem.title}</div>
+            <div className="posts__post-text">{elem.text}</div>
+          </div>
         );
-    }
+      })
+    ) : (
+      <div>No posts :(</div>
+    );
+  };
+
+  render() {
+    return (
+      <div className="feed">
+        <NewPost />
+        <div className="posts">{this.displayPosts()}</div>
+      </div>
+    );
+  }
 }
 
-function mapStateToProps(state) {
-    return {};
-}
-
-export default withRouter(connect(
-    mapStateToProps,
-)(Feed));
+export default withRouter(
+  connect(
+    (state) => ({
+      user: state.user,
+    }),
+    { fetchPosts },
+  )(Feed),
+);

@@ -5,6 +5,7 @@ import {Switch, Route} from "react-router-dom";
 import Header from "../Header";
 import Feed from "../Feed";
 import "./index.css";
+import {fetchPosts} from "../../actions";
 
 class Home extends Component {
 
@@ -26,5 +27,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(
-    mapStateToProps,
+    mapStateToProps, {fetchPosts}
 )(Home);
