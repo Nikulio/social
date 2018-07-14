@@ -9,11 +9,13 @@ import "./index.css"
 class Header extends Component {
     handleLogout = () => {
         const storage = window.localStorage
-        console.log("--- storage", storage);
         storage.removeItem("userID");
+        storage.removeItem("user");
         history.push("/login")
     }
     render() {
+        const storage = window.localStorage;
+        const user = JSON.parse(storage.getItem("userID"));
         return (
             <div className="header">
                 <div className="header__logo">
@@ -61,7 +63,7 @@ class Header extends Component {
                         </i>
                     </div>
                     <div className="header__user-name">
-                        User
+                        {user}
                     </div>
                 </div>
                 <div className="header__exit" onClick={this.handleLogout}>

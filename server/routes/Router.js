@@ -4,7 +4,7 @@ const path = require("path");
 const UserSchema = require("../models/UserSchema");
 const bcrypt = require('bcrypt');
 
-Router.route("/add/").post(function (req, res) {
+Router.route("/add").post(function (req, res) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         req.body.password = hash;
         UserSchema.create(req.body).then((data) => {
@@ -13,7 +13,21 @@ Router.route("/add/").post(function (req, res) {
     });
 });
 
-Router.route("/login/").post(function (req, res) {
+Router.route("/newpost").post(function (req, res) {
+    UserSchema.findByIdAndUpdate(req.body.user, {
+        $push: {
+            posts: req.body.data
+        }
+    }).then(data => {
+        res.send(data);
+    }, (err) => {
+        console.log("--- err", err);
+    })
+
+});
+
+
+Router.route("/login").post(function (req, res) {
     UserSchema.find({login: req.body.login}).then(
         (data) => {
             if (data.length === 0) {
@@ -22,8 +36,7 @@ Router.route("/login/").post(function (req, res) {
             }
             bcrypt.compare(req.body.password, data[0].password, function (err, userData) {
                 if (userData) {
-                    console.log("--- data", data);
-                    req.app.io.emit('userID', {userID: data[0].login});
+                    req.app.io.emit('userID', data);
                 } else {
                     req.app.io.emit('userID', {});
                 }

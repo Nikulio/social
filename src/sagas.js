@@ -1,11 +1,11 @@
-import { call, put, all, takeEvery, takeLatest } from 'redux-saga/effects'
+import {call, put, all, takeEvery, takeLatest} from 'redux-saga/effects'
 import axios from "axios";
 
 import history from "./history";
 import * as types from "./actions/types";
 
 const createUserApi = (data) => {
-    return axios.post('/api/add/', data)
+    return axios.post('http://localhost:5000/api/add', data)
         .then(response => {
             return response.json()
         })
@@ -15,7 +15,17 @@ const createUserApi = (data) => {
 };
 
 const loginUserApi = (data) => {
-    return axios.post('/api/login/', data)
+    return axios.post('http://localhost:5000/api/login', data)
+        .then(response => {
+            return response.json()
+        })
+        .catch(error => {
+            throw error
+        })
+};
+
+const newPostApi = (data) => {
+    return axios.post('http://localhost:5000/api/newpost', data)
         .then(response => {
             return response.json()
         })
@@ -27,9 +37,19 @@ const loginUserApi = (data) => {
 function* loginUser({payload}) {
     try {
         const user = yield call(loginUserApi, payload);
-        yield put({type: types.CREATE_USER_SUCCESS, user: user});
+        yield put({type: types.LOGIN_USER_SUCCESS, user: user});
     } catch (e) {
-        yield put({type: types.CREATE_USER_FAILED, message: e.message});
+        yield put({type: types.LOGIN_USER_FAILED, message: e.message});
+    }
+}
+
+
+function* newPost({payload}) {
+    try {
+        const newPost = yield call(newPostApi, payload);
+        yield put({type: types.NEW_POST_SUCCESS, payload});
+    } catch (e) {
+        yield put({type: types.NEW_POST_FAILED, message: e.message});
     }
 }
 
@@ -47,6 +67,7 @@ function* rootSaga() {
     yield all([
         takeEvery(types.CREATE_USER, createUser),
         takeEvery(types.LOGIN_USER, loginUser),
+        takeEvery(types.NEW_POST, newPost),
     ]);
 }
 

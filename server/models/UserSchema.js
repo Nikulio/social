@@ -8,6 +8,9 @@ const UserSchema = new Schema({
     login : {
         type: String
     },
+    posts : {
+        type : Array
+    },
     email : {
         type: String
     },
