@@ -13,3 +13,13 @@ export const loginUser = (data) => {
         payload: data
     }
 }
+
+export const newPost = (data, user) => {
+    return {
+        type : types.NEW_POST,
+        payload: {
+            data,
+            user
+        }
+    }
+}

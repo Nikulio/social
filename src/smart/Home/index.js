@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Switch, Route} from "react-router-dom";
 
 import Header from "../Header";
+import Feed from "../Feed";
 import "./index.css";
 
 class Home extends Component {
@@ -10,7 +11,10 @@ class Home extends Component {
     render() {
         return (
             <div className="Home">
-                <Header />
+                <Header/>
+                <div className="content">
+                    <Feed/>
+                </div>
 
             </div>
         );

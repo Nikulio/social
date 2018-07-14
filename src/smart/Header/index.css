@@ -6,7 +6,7 @@
   align-items: center;
   padding: 10px 20px;
   box-sizing: border-box;
-  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.54); }
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.64); }
   .header .header__logo {
     width: 100px; }
     .header .header__logo img {

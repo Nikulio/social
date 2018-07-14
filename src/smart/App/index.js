@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, withRouter} from "react-router-dom";
 import {Redirect} from "react-router-dom";
 import socketIOClient from 'socket.io-client'
 
@@ -32,13 +32,14 @@ class App extends Component {
         socket.on('userID', (data) => {
             console.log("--- kek", data);
             if (Object.keys(data).length > 0) {
-                console.log("--- lol", );
-                storage.setItem("userID", JSON.stringify(data))
+                console.log("--- data", data);
+                storage.setItem("user", JSON.stringify(data[0]))
+                storage.setItem("userID", JSON.stringify(data[0].login))
                 history.push("/")
             } else {
-                console.log("--- sdfsd");
+                console.log("--- valid error");
                 this.setState({
-                    userError : true
+                    userError: true
                 })
             }
         })
@@ -54,18 +55,14 @@ class App extends Component {
         return (
             <Wrapper storage={storage}>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Home}/>
                     <Route path="/login"
-                           render={ () => <Login userError={this.state.userError} /> }/>
+                           render={() => <Login userError={this.state.userError}/>}/>
                     <Route path="/registration" component={Registration}/>;
                 </Switch>
             </Wrapper>
         );
     }
-}
-
-function mapStateToProps(state) {
-    return {};
 }
 
 export default App;

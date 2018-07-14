@@ -45,6 +45,7 @@ LoginForm = reduxForm({
 
 class Login extends Component {
     submit = (data) => {
+        data.posts = [];
         this.props.loginUser(data);
     }
     render() {
