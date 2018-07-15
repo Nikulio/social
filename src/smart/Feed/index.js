@@ -9,10 +9,10 @@ class Feed extends Component {
   displayPosts = () => {
     const { posts } = this.props.user;
     return posts && posts.length > 0 ? (
-      posts.map((elem) => {
+      posts.map((elem, key) => {
         return (
           <div className="posts__post" key={elem.key}>
-            <div className="posts__post-title">{elem.title}</div>
+            <div className="posts__post-title">#{key + 1} {elem.title}</div>
             <div className="posts__post-text">{elem.text}</div>
           </div>
         );

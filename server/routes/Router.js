@@ -26,10 +26,8 @@ Router.route("/newpost").post(function(req, res) {
     req.body.data.key = id();
     user.posts.unshift(req.body.data);
     user.save();
-    console.log("--- user", user);
     res.send(user);
   });
-
 });
 
 Router.route("/user").post(function(req, res) {

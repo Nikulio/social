@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import field, { required } from "../../../shared/validation";
+import field, { required, renderTextarea } from "../../../shared/validation";
 import { withRouter } from "react-router-dom";
 import { newPost } from "../../../actions";
 import "./index.css";
@@ -19,8 +19,7 @@ let NewPostForm = (props) => {
       />
       <Field
         name="text"
-        type="text"
-        component={field}
+        component={renderTextarea}
         label="Full name"
         validate={[required]}
       />

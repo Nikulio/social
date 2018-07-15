@@ -1,4 +1,24 @@
 .newPost {
-  margin-bottom: 20px; }
+  margin-bottom: 60px;
+  width: 100%; }
+  .newPost .newPost-form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    transition: .3s all;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1); }
+    .newPost .newPost-form:hover {
+      cursor: pointer;
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2); }
+    .newPost .newPost-form .input-wrap.error input, .newPost .newPost-form .input-wrap.error textarea {
+      border: none;
+      border-bottom: 1px solid #ff4311; }
+    .newPost .newPost-form .input-wrap input, .newPost .newPost-form .input-wrap textarea {
+      border: none;
+      border-bottom: 1px solid #cdcdcd; }
+      .newPost .newPost-form .input-wrap input:focus, .newPost .newPost-form .input-wrap textarea:focus {
+        border: none;
+        border-bottom: 1px solid #88bbd6; }
 
 /*# sourceMappingURL=index.css.map */

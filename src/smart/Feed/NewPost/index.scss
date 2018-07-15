@@ -1,3 +1,36 @@
+@import "../../../shared/colors";
+
 .newPost {
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+  width: 100%;
+  .newPost-form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    transition: .3s all;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.1);
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    .input-wrap {
+      &.error {
+        input, textarea {
+          border: none;
+          border-bottom: 1px solid $red;
+        }
+      }
+      input, textarea {
+        border: none;
+        border-bottom: 1px solid $plaster;
+        &:focus {
+          border: none;
+          border-bottom: 1px solid $water;
+        }
+      }
+    }
+  }
 }
+
+

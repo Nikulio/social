@@ -27,4 +27,15 @@ const renderField = ({input, label, type, placeholder, meta: {touched, error, wa
         />
     </div>
 )
+
+export const renderTextarea = ({input, label, type, placeholder, meta: {touched, error, warning}}) => (
+  <div className={touched && error ? "error input-wrap" : "input-wrap"}>
+    <label>{label}</label>
+    <textarea {...input}
+           placeholder={placeholder}
+    />
+  </div>
+)
+
+
 export default renderField

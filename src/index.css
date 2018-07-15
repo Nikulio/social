@@ -42,11 +42,14 @@ a {
     position: relative; }
     .form .input-wrap:not(:last-of-type) {
       margin-bottom: 20px; }
-    .form .input-wrap.error input {
+    .form .input-wrap.error input, .form .input-wrap.error textarea {
       border: 1px solid #ff4311; }
     .form .input-wrap.error label {
       color: #ff4311; }
-    .form .input-wrap input {
+    .form .input-wrap textarea {
+      width: 100% !important;
+      min-height: 200px; }
+    .form .input-wrap input, .form .input-wrap textarea {
       width: 100%;
       height: 40px;
       padding-left: 100px;
@@ -54,7 +57,7 @@ a {
       font-size: 15px;
       border: 1px solid transparent;
       box-sizing: border-box; }
-      .form .input-wrap input:focus {
+      .form .input-wrap input:focus, .form .input-wrap textarea:focus {
         outline: none;
         border: 1px solid #88bbd6; }
     .form .input-wrap label {
