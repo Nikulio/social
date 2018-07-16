@@ -20,7 +20,7 @@ let NewPostForm = (props) => {
       <Field
         name="text"
         component={renderTextarea}
-        label="Full name"
+        label="Content"
         validate={[required]}
       />
       <div className="input-wrap">

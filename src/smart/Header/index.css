@@ -8,14 +8,14 @@
   box-sizing: border-box;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.64); }
   .header .header__logo {
-    width: 100px; }
+    width: 150px;
+    margin: 0 auto; }
     .header .header__logo img {
       width: 100%; }
   .header .header__user {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: auto;
     flex-wrap: wrap; }
     .header .header__user .header__user-name {
       width: 100%;
@@ -41,13 +41,13 @@
   background-repeat: no-repeat;
   background-image: url(//github-atom-io-herokuapp-com.global.ssl.fastly.net/assets/index-logo-9fb707770c2c8a018b7a2933906c3436.svg), url(//github-atom-io-herokuapp-com.global.ssl.fastly.net/assets/index-portal-sides-7d999cb5d5762880eef4ede55549d5c6.svg);
   background-position: center;
-  background-size: 40px 40px;
+  background-size: 50px;
   -webkit-user-select: none;
   user-select: none; }
 
 .hero-logo-circles {
-  width: 75px;
-  height: 75px;
+  width: 125px;
+  height: 125px;
   margin: auto;
   position: relative; }
 

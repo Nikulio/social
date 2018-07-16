@@ -14,6 +14,8 @@
     .newPost .newPost-form .input-wrap.error input, .newPost .newPost-form .input-wrap.error textarea {
       border: none;
       border-bottom: 1px solid #ff4311; }
+      .newPost .newPost-form .input-wrap.error input:focus, .newPost .newPost-form .input-wrap.error textarea:focus {
+        border-bottom: 1px solid #ff4311; }
     .newPost .newPost-form .input-wrap input, .newPost .newPost-form .input-wrap textarea {
       border: none;
       border-bottom: 1px solid #cdcdcd; }

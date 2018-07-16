@@ -5,13 +5,11 @@ import { initUser } from "../../actions";
 import socketIOClient from "socket.io-client";
 
 import Login from "../Login";
+import Friends from "../Friends";
 import Registration from "../Registration";
 import Home from "../Home";
 import history from "../../history";
 
-const Wrapper = (props) => {
-  return <div className="wrapper">{props.children}</div>;
-};
 
 class App extends Component {
   state = {
@@ -24,9 +22,19 @@ class App extends Component {
     const storage = window.localStorage;
     const userID = storage.getItem("userID");
 
+    if (userID) {
+      this.props.initUser(userID);
+      history.push("/");
+    } else {
+      history.push("/login");
+    }
+
     socket.on("userID", (data) => {
       if (Object.keys(data).length > 0) {
         storage.setItem("userID", JSON.stringify(data[0]._id));
+        const userID = storage.getItem("userID");
+        console.log("--- userID", userID);
+        this.props.initUser(userID);
         history.push("/");
       } else {
         this.setState({
@@ -35,12 +43,7 @@ class App extends Component {
       }
     });
 
-    if (userID) {
-      this.props.initUser(userID);
-      history.push("/");
-    } else {
-      history.push("/login");
-    }
+
   }
 
   render() {
@@ -52,6 +55,7 @@ class App extends Component {
           render={() => <Login userError={this.state.userError} />}
         />
         <Route path="/registration" component={Registration} />;
+        <Route path="/friends" component={Friends} />;
       </Switch>
     );
   }

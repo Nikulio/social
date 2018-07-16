@@ -1,0 +1,9 @@
+.side-nav {
+  display: flex;
+  flex-wrap: wrap; }
+  .side-nav .side-nav__element {
+    width: 100%; }
+    .side-nav .side-nav__element:not(:last-of-type) {
+      margin-bottom: 20px; }
+
+/*# sourceMappingURL=index.css.map */

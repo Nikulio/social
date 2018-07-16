@@ -22,11 +22,11 @@ let LoginForm = props => {
             />
             {userError && (
                 <div className="input-wrap">
-                    <div className="error-text">Bad login/password</div>
+                    <div className="error-text">access denied</div>
                 </div>
             )}
             <div className="input-wrap">
-                <Link to="/registration">New? Create SocAccount</Link>
+                <Link to="/registration">New? Create Account</Link>
             </div>
 
             <div className="input-wrap">
