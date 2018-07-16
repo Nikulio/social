@@ -12,7 +12,7 @@ let LoginForm = props => {
     const { handleSubmit, userError } = props
     return (
         <form onSubmit={handleSubmit} className="login-form form">
-            <Field name="login" type="text"
+            <Field name="user" type="text"
                    component={field} label="Login"
                    validate={[required]}
             />
@@ -32,8 +32,6 @@ let LoginForm = props => {
             <div className="input-wrap">
                 <button className="btn" type="submit">Submit</button>
             </div>
-
-
         </form>
     )
 }

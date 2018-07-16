@@ -30,6 +30,14 @@ Router.route("/newpost").post(function(req, res) {
   });
 });
 
+Router.route("/finduser").post(function(req, res) {
+  console.log("--- ", req.body);
+  UserSchema.findOne({ login: req.body.login }).then((user) => {
+    console.log("--- user", user);
+    res.send(user);
+  });
+});
+
 Router.route("/user").post(function(req, res) {
   const user = JSON.parse(req.body.id);
   UserSchema.find({ _id: user }).then(
@@ -43,7 +51,7 @@ Router.route("/user").post(function(req, res) {
 });
 
 Router.route("/login").post(function(req, res) {
-  UserSchema.find({ login: req.body.login }).then((data) => {
+  UserSchema.find({ login: req.body.user }).then((data) => {
     if (data.length === 0) {
       req.app.io.emit("userID", {});
       return false;

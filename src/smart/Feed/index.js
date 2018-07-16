@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import NewPost from "./NewPost";
 import { withRouter } from "react-router-dom";
-import { fetchPosts } from "../../actions";
 import "./index.css";
 
 class Feed extends Component {
@@ -37,6 +36,5 @@ export default withRouter(
     (state) => ({
       user: state.user,
     }),
-    { fetchPosts },
   )(Feed),
 );

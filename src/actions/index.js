@@ -7,13 +7,6 @@ export const createUser = (data) => {
   };
 };
 
-export const fetchPosts = (data) => {
-  return {
-    type: types.FETCH_POSTS,
-    payload: data,
-  };
-};
-
 export const initUser = (id) => {
   return {
     type: types.INIT_USER,
@@ -27,6 +20,15 @@ export const loginUser = (data) => {
     payload: data,
   };
 };
+
+export const findUser = (data) => {
+  return {
+    type: types.FIND_USER,
+    payload: data,
+  };
+};
+
+
 
 export const newPost = (data, user) => {
   return {
