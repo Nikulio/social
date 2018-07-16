@@ -9,11 +9,12 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.64); }
   .header .header__logo {
     width: 150px;
-    margin: 0 auto;
+    margin-left: auto;
     margin-right: -220px; }
     .header .header__logo img {
       width: 100%; }
   .header .header__user {
+    margin-left: auto;
     display: flex;
     justify-content: center;
     align-items: center;
