@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import { Link } from "react-router-dom";
+import Item from "./Item";
 
 import field, { required } from "../../../shared/validation";
 import { findUser } from "../../../actions";
@@ -34,31 +34,12 @@ class Search extends Component {
   submit = (data) => {
     this.props.findUser(data);
   };
-  addFriend = (e) => {
-    e.preventDefault();
-    console.log("--- ", e.getAttribute("data-from"));
-  };
   displaySearchResult = () => {
     const { search } = this.props;
     const res = search.search_friends;
-    const storage = window.localStorage;
-    const user = JSON.parse(storage.getItem("userID"))
     return res && res.length > 0 ? (
       res.map((element) => {
-        return (
-          <div className="searchResult__result" key={element._id}>
-            <div className="searchResult__result-title">{element.login}</div>
-            <a
-              href="#"
-              className="btn"
-              data-from={user}
-              data-to={element._id}
-              onClick={this.addFriend}
-            >
-              Add friend
-            </a>
-          </div>
-        );
+        return <Item key={element._id} user={element}/>;
       })
     ) : (
       <div>Results is empty</div>
@@ -68,7 +49,7 @@ class Search extends Component {
   render() {
     return (
       <div className="search">
-        <SearchForm onSubmit={this.submit} />
+        <SearchForm onSubmit={this.submit}/>
         <div className="searchResult">{this.displaySearchResult()}</div>
       </div>
     );

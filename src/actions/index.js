@@ -7,6 +7,17 @@ export const createUser = (data) => {
   };
 };
 
+export const addFriendToList = (from, to) => {
+
+  return {
+    type: types.ADD_USER_TO_LIST,
+    payload: {
+      from,
+      to
+    },
+  };
+};
+
 export const initUser = (id) => {
   return {
     type: types.INIT_USER,

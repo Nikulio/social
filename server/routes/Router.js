@@ -31,9 +31,7 @@ Router.route("/newpost").post(function(req, res) {
 });
 
 Router.route("/finduser").post(function(req, res) {
-  console.log("--- ", req.body);
   UserSchema.findOne({ login: req.body.login }).then((user) => {
-    console.log("--- user", user);
     res.send(user);
   });
 });
@@ -49,6 +47,28 @@ Router.route("/user").post(function(req, res) {
     },
   );
 });
+
+Router.route("/addfriend").post(function(req, res) {
+  console.log("--- body here", req.body);
+  UserSchema.find({ _id: req.body.to }).then(
+    (to) => {
+      UserSchema.find({ _id: req.body.from }).then(
+        (from) => {
+          console.log("--- to", to);
+          to[0].requests.push(from[0]);
+          to[0].save();
+          res.send("success");
+        },
+        (err) => {
+          console.log("--- err", err);
+        });
+    },
+    (err) => {
+      console.log("--- err", err);
+    },
+  );
+});
+
 
 Router.route("/login").post(function(req, res) {
   UserSchema.find({ login: req.body.user }).then((data) => {

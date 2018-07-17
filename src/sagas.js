@@ -104,11 +104,36 @@ function* findUser(data) {
       yield put({ type: types.FIND_USER_SUCCESS, payload : user });
     } else {
       yield put({ type: types.FIND_USER_FAILED, payload: []  });
-    } 
+    }
   } catch (e) {
     yield put({ type: types.FIND_USER_FAILED, message: e.message });
   }
 }
+
+const addFriendToListApi = (data) => {
+  return axios
+    .post("/api/addfriend", data)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+function* addFriendToList(data) {
+  try {
+    const user = yield call(addFriendToListApi, data.payload);
+    if (user.data) {
+      yield put({ type: types.ADD_USER_TO_LIST_SUCCESS, payload : user });
+    } else {
+      yield put({ type: types.ADD_USER_TO_LIST_FAILED, payload: []  });
+    }
+  } catch (e) {
+    yield put({ type: types.ADD_USER_TO_LIST_FAILED, message: e.message });
+  }
+}
+
 
 
 function* rootSaga() {
@@ -118,6 +143,7 @@ function* rootSaga() {
     takeEvery(types.NEW_POST, newPost),
     takeEvery(types.INIT_USER, initUser),
     takeEvery(types.FIND_USER, findUser),
+    takeEvery(types.ADD_USER_TO_LIST, addFriendToList),
   ]);
 }
 
