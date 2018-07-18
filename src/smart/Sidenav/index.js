@@ -8,9 +8,8 @@ class Sidenav extends Component {
   render() {
     return (
       <div className="side-nav">
-        <Link className="side-nav__element" to="/account">My account</Link>
+        <Link className="side-nav__element" to="/">Feed</Link>
         <Link className="side-nav__element" to="/friends">Friends</Link>
-        {/*<Link className="side-nav__element" to="/search">Search</Link>*/}
       </div>
     );
   }

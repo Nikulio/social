@@ -1,30 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import {acceptFriendship} from "../../actions";
+import { acceptFriendship } from "../../actions";
 import history from "../../history";
 
 import "./index.css";
 
-
 class Item extends Component {
-
   approveFriend = () => {
-    const {name} = this.props.user
-    this.props.acceptFriendship()
-  }
+    const { name } = this.props.user;
+    this.props.acceptFriendship();
+  };
+
   render() {
-    const {name} = this.props.user
-    return (
-      <div onClick={this.approveFriend}>{name}</div>
-    )
+    const { name } = this.props.user;
+    return <div onClick={this.approveFriend}>{name}</div>;
   }
 }
 
 class Header extends Component {
-
   state = {
-    headerNotifications: false,
+    headerNotif: false,
   };
 
   handleLogout = () => {
@@ -33,15 +29,11 @@ class Header extends Component {
     history.push("/login");
   };
 
-  openHeaderNotifications = () => {
+  handleNotif = () => {
     this.setState({
-      headerNotifications: !this.state.headerNotifications,
+      headerNotif: !this.state.headerNotif,
     });
   };
-
-  approveFriend = () => {
-
-  }
 
   render() {
     const { name, requests } = this.props.user;
@@ -107,32 +99,29 @@ class Header extends Component {
           </Link>
         </div>
         <div className="header__menu">
-          <div className="header__notifications" onClick={this.openHeaderNotifications}>
-            <i className="material-icons">
-              wc
-            </i>
-            <div className="header__notifications--count">
-              {friendRequests > 0 && friendRequests}
-            </div>
-            {this.state.headerNotifications && <div className="list">
-              {requests.map(elem => {
-                console.log("--- elem", elem);
-                return (
-                  <Item key={elem._id} user={elem} />
-              )   
-              })}
-            </div>}
-
+          <div
+            className="header-notifications header__menu-item"
+            onClick={this.handleNotif}
+          >
+            <i className="material-icons">wc</i>
+            {friendRequests > 0 && (
+              <div className="header-notifications__count">
+                {friendRequests}
+              </div>
+            )}
           </div>
-          <div className="header__user">
-            <div className="header__user-logo">
+          <div className="header-user header__menu-item">
+            <div className="header-user__logo">
               <i className="material-icons">face</i>
             </div>
-            <div className="header__user-name">{name}</div>
+            <div className="header-user__name">{name}</div>
           </div>
-          <div className="header__exit" onClick={this.handleLogout}>
+          <div
+            className="header-exit header__menu-item"
+            onClick={this.handleLogout}
+          >
             <i className="material-icons">exit_to_app</i>
-            <div className="header__exit-name">Exit</div>
+            <div className="header-exit__name">Exit</div>
           </div>
         </div>
       </div>
@@ -144,6 +133,7 @@ export default withRouter(
   connect(
     (state) => ({
       user: state.user,
-    }), {acceptFriendship}
+    }),
+    { acceptFriendship },
   )(Header),
 );

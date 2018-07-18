@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  padding: 20px;
+  align-items: flex-start; }
+
+.side-nav {
+  flex-basis: 25%;
+  width: 25%; }
+
+.body {
+  flex-basis: 75%;
+  width: 75%; }
+
+/*# sourceMappingURL=index.css.map */

@@ -1,3 +1,22 @@
+.search-form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-bottom: 20px; }
+  .search-form .input-wrap.error input, .search-form .input-wrap.error textarea {
+    border: none;
+    border-bottom: 1px solid #ff4311; }
+    .search-form .input-wrap.error input:focus, .search-form .input-wrap.error textarea:focus {
+      border-bottom: 1px solid #ff4311; }
+  .search-form .input-wrap input, .search-form .input-wrap textarea {
+    border: none;
+    border-bottom: 1px solid #cdcdcd; }
+    .search-form .input-wrap input:focus, .search-form .input-wrap textarea:focus {
+      border: none;
+      border-bottom: 1px solid #88bbd6; }
 
+.friends {
+  margin-top: 40px; }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,0 +1,21 @@
+@import "../../../../shared/colors";
+
+.searchResult__result {
+  display: flex;
+  align-items: center;
+  .searchResult__order {
+    margin-right: 10px;
+  }
+  .searchResult__button {
+    margin-left: 20px;
+    &:hover {
+      cursor: pointer;
+      i {
+        color: $water;
+      }
+    }
+    i {
+      transition: .3s all;
+    }
+  }
+}

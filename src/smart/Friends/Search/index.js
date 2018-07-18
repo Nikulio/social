@@ -5,11 +5,12 @@ import Item from "./Item";
 
 import field, { required } from "../../../shared/validation";
 import { findUser } from "../../../actions";
+import "./index.css";
 
 let SearchForm = (props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit} className="login-form form">
+    <form onSubmit={handleSubmit} className="search-form form">
       <Field
         name="login"
         type="text"
@@ -38,11 +39,12 @@ class Search extends Component {
     const { search } = this.props;
     const res = search.search_friends;
     return res && res.length > 0 ? (
-      res.map((element) => {
+      res.map((element, key) => {
+        element.order = key + 1
         return <Item key={element._id} user={element}/>;
       })
     ) : (
-      <div>Results is empty</div>
+      <div />
     );
   };
 

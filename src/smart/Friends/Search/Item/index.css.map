@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAEA,qBAAsB;EACpB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,0CAAqB;IACnB,YAAY,EAAE,IAAI;EAEpB,2CAAsB;IACpB,WAAW,EAAE,IAAI;IACjB,iDAAQ;MACN,MAAM,EAAE,OAAO;MACf,mDAAE;QACA,KAAK,ECZJ,OAAO;IDeZ,6CAAE;MACA,UAAU,EAAE,OAAO",
+"sources": ["index.scss","../../../../shared/colors.scss"],
 "names": [],
 "file": "index.css"
 }

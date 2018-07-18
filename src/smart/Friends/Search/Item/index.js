@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import {addFriendToList} from "../../../../actions";
 
+import "./index.css";
+
 class Item extends Component {
   addFriend = () => {
     const storage = window.localStorage;
@@ -10,11 +12,16 @@ class Item extends Component {
     this.props.addFriendToList(userID, _id);
   }
   render() {
-    const {name} = this.props.user
+    const {name, order} = this.props.user
     return (
       <div className="searchResult__result">
-        <div>{name}</div>
-        <button onClick={this.addFriend}>Add friend</button>
+        <div className="searchResult__order">{order}</div>
+        <div className='searchResult__title'>{name}</div>
+        <div className="searchResult__button" onClick={this.addFriend}>
+          <i className="material-icons">
+            person_add
+          </i>
+        </div>
       </div>
     );
   }

@@ -5,11 +5,14 @@ import { initUser } from "../../actions";
 import socketIOClient from "socket.io-client";
 
 import Login from "../Login";
-import Friends from "../Friends";
 import Registration from "../Registration";
-import Home from "../Home";
+import Header from "../Header";
 import history from "../../history";
+import Feed from "../Feed";
+import Friends from "../Friends";
+import Sidenav from "../Sidenav";
 
+import "./index.css";
 
 class App extends Component {
   state = {
@@ -23,7 +26,6 @@ class App extends Component {
     const userID = storage.getItem("userID");
 
     if (userID) {
-      console.log("--- ", userID);
       this.props.initUser(userID);
       // history.push("/");
     } else {
@@ -42,20 +44,28 @@ class App extends Component {
         });
       }
     });
-
-
   }
 
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={() => <Home />} />
         <Route
           path="/login"
-          render={() => <Login userError={this.state.userError} />}
+          render={() => <Login userError={this.state.userError}/>}
         />
-        <Route path="/registration" component={Registration} />;
-        <Route path="/friends" component={Friends} />;
+        <Route path="/registration" component={Registration}/>;
+        <div className="app">
+          <Header/>
+          <div className="content">
+            <Sidenav/>
+            <div className="body">
+              <Switch>
+                <Route exact path="/" component={Feed}/>
+                <Route path="/friends" component={Friends}/>
+              </Switch>
+            </div>
+          </div>
+        </div>
       </Switch>
     );
   }

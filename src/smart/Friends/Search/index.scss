@@ -1,0 +1,31 @@
+@import "../../../shared/colors";
+.search-form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-bottom: 20px;
+  .input-wrap {
+    &.error {
+      input, textarea {
+        border: none;
+        border-bottom: 1px solid $red;
+        &:focus {
+          border-bottom: 1px solid $red;
+        }
+      }
+    }
+    input, textarea {
+      border: none;
+      border-bottom: 1px solid $plaster;
+      &:focus {
+        border: none;
+        border-bottom: 1px solid $water;
+      }
+    }
+  }
+}
+
+.friends {
+  margin-top: 40px;
+}

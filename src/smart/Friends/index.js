@@ -19,7 +19,7 @@ class Friends extends Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="friends-content">
         <Search/>
         <div className="friends">
           {this.displayFriends()}
