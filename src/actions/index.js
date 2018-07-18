@@ -7,6 +7,13 @@ export const createUser = (data) => {
   };
 };
 
+export const acceptFriendship = (data) => {
+  return {
+    type: types.ACCEPT_FRIENDSHIP,
+    payload: data
+  }
+}
+
 export const addFriendToList = (from, to) => {
 
   return {
