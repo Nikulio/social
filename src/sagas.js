@@ -47,6 +47,17 @@ const initUserApi = (id) => {
     });
 };
 
+const findUserApi = (user) => {
+  return axios
+    .post("/api/finduser", {login : user.login})
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
 function* loginUser({ payload }) {
   try {
     const user = yield call(loginUserApi, payload);
@@ -77,15 +88,6 @@ function* createUser({ payload }) {
   }
 }
 
-function* fetchPosts(id) {
-  try {
-    const user = yield call(createUserApi, id);
-    yield put({ type: types.CREATE_USER_SUCCESS, user: user });
-  } catch (e) {
-    yield put({ type: types.CREATE_USER_FAILED, message: e.message });
-  }
-}
-
 function* initUser(data) {
   try {
     const user = yield call(initUserApi, data.payload);
@@ -95,13 +97,53 @@ function* initUser(data) {
   }
 }
 
+function* findUser(data) {
+  try {
+    const user = yield call(findUserApi, data.payload);
+    if (user.data) {
+      yield put({ type: types.FIND_USER_SUCCESS, payload : user });
+    } else {
+      yield put({ type: types.FIND_USER_FAILED, payload: []  });
+    }
+  } catch (e) {
+    yield put({ type: types.FIND_USER_FAILED, message: e.message });
+  }
+}
+
+const addFriendToListApi = (data) => {
+  return axios
+    .post("/api/addfriend", data)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+function* addFriendToList(data) {
+  try {
+    const user = yield call(addFriendToListApi, data.payload);
+    if (user.data) {
+      yield put({ type: types.ADD_USER_TO_LIST_SUCCESS, payload : user });
+    } else {
+      yield put({ type: types.ADD_USER_TO_LIST_FAILED, payload: []  });
+    }
+  } catch (e) {
+    yield put({ type: types.ADD_USER_TO_LIST_FAILED, message: e.message });
+  }
+}
+
+
+
 function* rootSaga() {
   yield all([
     takeEvery(types.CREATE_USER, createUser),
     takeEvery(types.LOGIN_USER, loginUser),
     takeEvery(types.NEW_POST, newPost),
-    takeEvery(types.NEW_POST, fetchPosts),
     takeEvery(types.INIT_USER, initUser),
+    takeEvery(types.FIND_USER, findUser),
+    takeEvery(types.ADD_USER_TO_LIST, addFriendToList),
   ]);
 }
 

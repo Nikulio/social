@@ -7,10 +7,21 @@ export const createUser = (data) => {
   };
 };
 
-export const fetchPosts = (data) => {
+export const acceptFriendship = (data) => {
   return {
-    type: types.FETCH_POSTS,
-    payload: data,
+    type: types.ACCEPT_FRIENDSHIP,
+    payload: data
+  }
+}
+
+export const addFriendToList = (from, to) => {
+
+  return {
+    type: types.ADD_USER_TO_LIST,
+    payload: {
+      from,
+      to
+    },
   };
 };
 
@@ -27,6 +38,15 @@ export const loginUser = (data) => {
     payload: data,
   };
 };
+
+export const findUser = (data) => {
+  return {
+    type: types.FIND_USER,
+    payload: data,
+  };
+};
+
+
 
 export const newPost = (data, user) => {
   return {

@@ -23,8 +23,9 @@ class App extends Component {
     const userID = storage.getItem("userID");
 
     if (userID) {
+      console.log("--- ", userID);
       this.props.initUser(userID);
-      history.push("/");
+      // history.push("/");
     } else {
       history.push("/login");
     }
@@ -33,7 +34,6 @@ class App extends Component {
       if (Object.keys(data).length > 0) {
         storage.setItem("userID", JSON.stringify(data[0]._id));
         const userID = storage.getItem("userID");
-        console.log("--- userID", userID);
         this.props.initUser(userID);
         history.push("/");
       } else {

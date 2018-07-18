@@ -5,7 +5,6 @@ import Header from "../Header";
 import Feed from "../Feed";
 import Sidenav from "../Sidenav";
 import "./index.css";
-import { fetchPosts } from "../../actions";
 
 class Home extends Component {
   render() {
@@ -27,5 +26,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { fetchPosts },
 )(Home);
