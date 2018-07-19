@@ -5,11 +5,17 @@ const UserSchema = require("../models/UserSchema");
 const bcrypt = require("bcrypt");
 
 Router.route("/add").post(function(req, res) {
-  bcrypt.hash(req.body.password, 10, function(err, hash) {
-    req.body.password = hash;
-    UserSchema.create(req.body).then((data) => {
-      res.json(data);
-    });
+  UserSchema.findOne({ login: req.body.login }).then((data) => {
+    if (data === null) {
+      bcrypt.hash(req.body.password, 10, function(err, hash) {
+        req.body.password = hash;
+        UserSchema.create(req.body).then((data) => {
+          res.json(data);
+        });
+      });
+    } else {
+      res.json({ message: "User exists" });
+    }
   });
 });
 
@@ -61,7 +67,8 @@ Router.route("/addfriend").post(function(req, res) {
         },
         (err) => {
           console.log("--- err", err);
-        });
+        },
+      );
     },
     (err) => {
       console.log("--- err", err);
@@ -69,11 +76,10 @@ Router.route("/addfriend").post(function(req, res) {
   );
 });
 
-
 Router.route("/login").post(function(req, res) {
   UserSchema.find({ login: req.body.user }).then((data) => {
     if (data.length === 0) {
-      req.app.io.emit("userID", {});
+      req.app.io.emit("userID", null);
       return false;
     }
     bcrypt.compare(req.body.password, data[0].password, function(
@@ -83,7 +89,7 @@ Router.route("/login").post(function(req, res) {
       if (userData) {
         req.app.io.emit("userID", data);
       } else {
-        req.app.io.emit("userID", {});
+        req.app.io.emit("userID", null);
       }
     });
   });

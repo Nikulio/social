@@ -5,6 +5,7 @@ import history from "./history";
 import * as types from "./actions/types";
 
 const createUserApi = (data) => {
+  console.log("--- saga data", data);
   return axios
     .post("/api/add", data)
     .then((response) => {

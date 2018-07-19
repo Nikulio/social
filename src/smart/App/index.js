@@ -27,21 +27,16 @@ class App extends Component {
 
     if (userID) {
       this.props.initUser(userID);
-      // history.push("/");
     } else {
       history.push("/login");
     }
 
     socket.on("userID", (data) => {
-      if (Object.keys(data).length > 0) {
+      if (data !== null) {
         storage.setItem("userID", JSON.stringify(data[0]._id));
         const userID = storage.getItem("userID");
         this.props.initUser(userID);
         history.push("/");
-      } else {
-        this.setState({
-          userError: true,
-        });
       }
     });
   }
