@@ -36,6 +36,19 @@
     width: 15px;
     font-size: 10px;
     height: 15px; }
+  .header .header-notifications .header-notifications__list {
+    position: absolute;
+    bottom: -80px;
+    width: 200px;
+    z-index: 1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #99d3df; }
+    .header .header-notifications .header-notifications__list .header-notifications__list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
   .header .header-user {
     margin-left: auto; }
     .header .header-user .header-user__name {

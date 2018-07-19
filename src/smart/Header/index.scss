@@ -46,6 +46,21 @@
       font-size: 10px;
       height: 15px;
     }
+    .header-notifications__list {
+      position: absolute;
+      bottom: -80px;
+      width: 200px;
+      z-index: 1;
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 20px;
+      background: $ice;
+      .header-notifications__list-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
   }
   .header-user {
     margin-left: auto;
@@ -142,3 +157,4 @@
     transform: rotate(1turn)
   }
 }
+

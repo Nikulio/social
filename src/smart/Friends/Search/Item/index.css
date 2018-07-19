@@ -1,6 +1,7 @@
 .searchResult__result {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  justify-content: space-between; }
   .searchResult__result .searchResult__order {
     margin-right: 10px; }
   .searchResult__result .searchResult__button {

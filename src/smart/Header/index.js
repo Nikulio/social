@@ -8,19 +8,36 @@ import "./index.css";
 
 class Item extends Component {
   approveFriend = () => {
-    const { name } = this.props.user;
-    this.props.acceptFriendship();
+    const storage = window.localStorage;
+    const userID = JSON.parse(storage.getItem("userID"))
+    const {_id} = this.props.user
+    let data = {
+      self : userID,
+      whom : _id
+    }
+    this.props.acceptFriendship(data);
   };
 
   render() {
+
     const { name } = this.props.user;
-    return <div onClick={this.approveFriend}>{name}</div>;
+    return (
+      <div
+        onClick={this.approveFriend}
+        className="header-notifications__list-item"
+      >
+        <div>{name}</div>
+        <div onClick={this.acceptFriendship}>
+          <i className="material-icons">done</i>
+        </div>
+      </div>
+    );
   }
 }
 
 class Header extends Component {
   state = {
-    headerNotif: false,
+    openFriendRequests: false,
   };
 
   handleLogout = () => {
@@ -29,14 +46,15 @@ class Header extends Component {
     history.push("/login");
   };
 
-  handleNotif = () => {
+  openFriendRequestsHandle = () => {
     this.setState({
-      headerNotif: !this.state.headerNotif,
+      openFriendRequests: !this.state.openFriendRequests,
     });
   };
 
   render() {
-    const { name, requests } = this.props.user;
+    const { name, requests } = this.props.me;
+    const { openFriendRequests } = this.state;
     const friendRequests = requests && requests.length;
     return (
       <div className="header">
@@ -101,12 +119,17 @@ class Header extends Component {
         <div className="header__menu">
           <div
             className="header-notifications header__menu-item"
-            onClick={this.handleNotif}
+            onClick={this.openFriendRequestsHandle}
           >
             <i className="material-icons">wc</i>
             {friendRequests > 0 && (
               <div className="header-notifications__count">
                 {friendRequests}
+              </div>
+            )}
+            {openFriendRequests && (
+              <div className="header-notifications__list">
+                {requests.map((elem) => <Item acceptFriendship={this.props.acceptFriendship} key={elem._id} user={elem} />)}
               </div>
             )}
           </div>
@@ -132,7 +155,7 @@ class Header extends Component {
 export default withRouter(
   connect(
     (state) => ({
-      user: state.user,
+      me: state.user,
     }),
     { acceptFriendship },
   )(Header),

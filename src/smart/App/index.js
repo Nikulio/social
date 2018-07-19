@@ -46,21 +46,28 @@ class App extends Component {
       <Switch>
         <Route
           path="/login"
-          render={() => <Login userError={this.state.userError}/>}
+          render={() => <Login userError={this.state.userError} />}
         />
-        <Route path="/registration" component={Registration}/>;
-        <div className="app">
-          <Header/>
-          <div className="content">
-            <Sidenav/>
-            <div className="body">
-              <Switch>
-                <Route exact path="/" component={Feed}/>
-                <Route path="/friends" component={Friends}/>
-              </Switch>
-            </div>
-          </div>
-        </div>
+        <Route path="/registration" component={Registration} />;
+        <Route
+          path="/"
+          render={() => {
+            return (
+              <div className="app">
+                <Header />
+                <div className="content">
+                  <Sidenav />
+                  <div className="body">
+                    <Switch>
+                      <Route exact path="/" component={Feed} />
+                      <Route path="/friends" component={Friends} />
+                    </Switch>
+                  </div>
+                </div>
+              </div>
+            );
+          }}
+        />;
       </Switch>
     );
   }
