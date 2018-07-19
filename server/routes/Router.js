@@ -5,17 +5,19 @@ const UserSchema = require("../models/UserSchema");
 const bcrypt = require("bcrypt");
 
 Router.route("/add").post(function(req, res) {
-  UserSchema.findOne({ login: req.body.login }).then((data) => {
-    if (data === null) {
-      bcrypt.hash(req.body.password, 10, function(err, hash) {
-        req.body.password = hash;
-        UserSchema.create(req.body).then((data) => {
-          res.json(data);
+  UserSchema.findOne({ login: req.body.login }).then((checkOne) => {
+    UserSchema.findOne({ email: req.body.email }).then((checkTwo) => {
+      if (checkOne === null && checkTwo === null) {
+        bcrypt.hash(req.body.password, 10, function(err, hash) {
+          req.body.password = hash;
+          UserSchema.create(req.body).then((data) => {
+            res.json(data);
+          });
         });
-      });
-    } else {
-      res.json({ message: "User exists" });
-    }
+      } else {
+        res.json({ message: "User exists" });
+      }
+    });
   });
 });
 
@@ -49,6 +51,7 @@ Router.route("/user").post(function(req, res) {
       res.send(data);
     },
     (err) => {
+      res.send(err);
       console.log("--- err", err);
     },
   );
@@ -60,12 +63,12 @@ Router.route("/addfriend").post(function(req, res) {
     (to) => {
       UserSchema.find({ _id: req.body.from }).then(
         (from) => {
-          console.log("--- to", to);
           to[0].requests.push(from[0]);
           to[0].save();
           res.send("success");
         },
         (err) => {
+          res.send(err);
           console.log("--- err", err);
         },
       );
