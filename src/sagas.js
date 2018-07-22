@@ -136,6 +136,7 @@ function* addFriendToList(data) {
 
 function* acceptFriendship(data) {
   try {
+    
     const user = yield call(acceptFriendshipApi, data.payload);
     yield put({ type: types.ACCEPT_FRIENDSHIP_SUCCESS, payload: user });
   } catch (e) {
@@ -144,6 +145,7 @@ function* acceptFriendship(data) {
 }
 
 const acceptFriendshipApi = (data) => {
+  console.log("--- ", data);
   return axios
     .post("/api/confirm_friend", data)
     .then((response) => {

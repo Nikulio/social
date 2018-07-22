@@ -7,11 +7,11 @@ import socketIOClient from "socket.io-client";
 import Login from "../Login";
 import Registration from "../Registration";
 import Header from "../Header";
-import history from "../../history";
 import Feed from "../Feed";
 import Friends from "../Friends";
 import Sidenav from "../Sidenav";
 
+import history from "../../history";
 import "./index.css";
 
 class App extends Component {
@@ -39,6 +39,16 @@ class App extends Component {
         history.push("/");
       }
     });
+  }
+
+  static getDerivedStateFromProps() {
+    const path = history.location.pathname;
+    if (path === "/login" || path === "/registration") {
+      const storage = window.localStorage;
+      storage.removeItem("userID");
+      return null
+    }
+    return null
   }
 
   render() {

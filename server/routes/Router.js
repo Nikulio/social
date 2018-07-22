@@ -64,7 +64,7 @@ Router.route("/confirm_friend").post(function(req, res) {
     (self) => {
       UserSchema.findOne({ _id: req.body.whom }).then(
         (whom) => {
-          self.friends.push(whom)
+          self.friends.push(whom);
           whom.friends.push(self);
           self.requests.splice(self.requests.indexOf(whom), 1);
           self.save();
