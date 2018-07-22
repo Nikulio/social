@@ -56,6 +56,7 @@ class Header extends Component {
     const { name, requests } = this.props.me;
     const { openFriendRequests } = this.state;
     const friendRequests = requests && requests.length;
+
     return (
       <div className="header">
         <div className="header__logo">

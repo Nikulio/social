@@ -14,6 +14,14 @@ export const acceptFriendship = (data) => {
   }
 }
 
+export const fetchUserFriends = (data) => {
+  console.log("--- data", data);
+  return {
+    type: types.FETCH_USER_FRIENDS,
+    payload: data
+  }
+}
+
 export const addFriendToList = (from, to) => {
 
   return {

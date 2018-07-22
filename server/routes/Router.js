@@ -1,6 +1,5 @@
 const express = require("express");
 const Router = express.Router();
-const path = require("path");
 const UserSchema = require("../models/UserSchema");
 const bcrypt = require("bcrypt");
 
@@ -60,25 +59,23 @@ Router.route("/user").post(function(req, res) {
 });
 
 Router.route("/confirm_friend").post(function(req, res) {
-  UserSchema.findOne({ _id: req.body.self }).then(
+  UserSchema.findOne(
+    { _id: req.body.self }).then(
     (self) => {
-      UserSchema.findOne({ _id: req.body.whom }).then(
-        (whom) => {
-          self.friends.push(whom);
-          whom.friends.push(self);
-          self.requests.splice(self.requests.indexOf(whom), 1);
-          self.save();
-          whom.save();
-          res.send("success");
-        },
-        (err) => {
-          res.send(err);
-          console.log("--- err", err);
-        },
-      );
-    },
-    (err) => {
-      console.log("--- err", err);
+      UserSchema.findOneAndUpdate(
+        { _id: req.body.whom },
+        { $push: { friends: req.body.self } },
+        function(error, success) {
+          if (error) {
+            console.log(error);
+            res.send(error)
+          } else {
+            self.friends.push(req.body.whom);
+            self.requests.splice(self.requests.indexOf(success), 1);
+            self.save();
+            res.send(success);
+          }
+        });
     },
   );
 });

@@ -84,7 +84,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {user : state.use};
 }
 
 export default withRouter(

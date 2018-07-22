@@ -1,28 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import Search from "./Search";
+import {fetchUserFriends} from "../../actions";
 
 class Friends extends Component {
 
-  displayFriends = () => {
-    const { friends } = this.props;
-    return friends && friends.length > 0 ? (
-      friends.map(elem => {
-        return <div>
-          {elem.title}
-        </div>;
-      })
-    ) : (
-      <div>No friends :(</div>
-    );
-  };
+  componentDidUpdate() {
+    const {friends} = this.props
+    if (friends) {
+      this.props.fetchUserFriends(friends);
+    }
+  }
 
   render() {
     return (
       <div className="friends-content">
         <Search/>
         <div className="friends">
-          {this.displayFriends()}
+          Soon...
         </div>
       </div>
     );
@@ -30,9 +26,9 @@ class Friends extends Component {
 }
 
 function mapStateToProps(state) {
-  return { friends: state.friends };
+  return { friends: state.user.friends };
 }
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps, {fetchUserFriends}
 )(Friends);
