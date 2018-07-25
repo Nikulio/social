@@ -49,6 +49,9 @@ class Search extends Component {
   };
 
   render() {
+
+    console.log("--- ", this.props.user.friends);
+
     return (
       <div className="search">
         <SearchForm onSubmit={this.submit}/>
@@ -61,6 +64,7 @@ class Search extends Component {
 function mapStateToProps(state) {
   return {
     search: state.search,
+    user : state.user
   };
 }
 

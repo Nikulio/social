@@ -9,17 +9,16 @@ import "./index.css";
 class Item extends Component {
   approveFriend = () => {
     const storage = window.localStorage;
-    const userID = JSON.parse(storage.getItem("userID"))
-    const {_id} = this.props.user
+    const userID = JSON.parse(storage.getItem("userID"));
+    const { _id } = this.props.user;
     let data = {
-      self : userID,
-      whom : _id
-    }
+      self: userID,
+      whom: _id,
+    };
     this.props.acceptFriendship(data);
   };
 
   render() {
-
     const { name } = this.props.user;
     return (
       <div
@@ -128,9 +127,15 @@ class Header extends Component {
                 {friendRequests}
               </div>
             )}
-            {openFriendRequests && (
+            {openFriendRequests && requests.length > 0 && (
               <div className="header-notifications__list">
-                {requests.map((elem) => <Item acceptFriendship={this.props.acceptFriendship} key={elem._id} user={elem} />)}
+                {requests.map((elem) => (
+                  <Item
+                    acceptFriendship={this.props.acceptFriendship}
+                    key={elem._id}
+                    user={elem}
+                  />
+                ))}
               </div>
             )}
           </div>

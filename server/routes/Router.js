@@ -64,13 +64,14 @@ Router.route("/confirm_friend").post(function(req, res) {
     (self) => {
       UserSchema.findOneAndUpdate(
         { _id: req.body.whom },
-        { $push: { friends: req.body.self } },
+        { $push: { friends: self } },
         function(error, success) {
           if (error) {
             console.log(error);
             res.send(error)
           } else {
-            self.friends.push(req.body.whom);
+            console.log("--- success", success);
+            self.friends.push(success);
             self.requests.splice(self.requests.indexOf(success), 1);
             self.save();
             res.send(success);

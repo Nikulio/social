@@ -83,7 +83,7 @@ function* createUser({ payload }) {
   try {
     const user = yield call(createUserApi, payload);
     if (user.data.message) {
-      yield put({ type: types.CREATE_USER_FAILED});
+      yield put({ type: types.CREATE_USER_FAILED });
     }
     yield put({ type: types.CREATE_USER_SUCCESS, user: user });
   } catch (e) {
@@ -139,9 +139,12 @@ function* addFriendToList(data) {
 
 function* acceptFriendship(data) {
   try {
-    
     const user = yield call(acceptFriendshipApi, data.payload);
-    yield put({ type: types.ACCEPT_FRIENDSHIP_SUCCESS, payload: user });
+    const init = yield call(initUserApi, data.payload.self);
+    yield put(
+      { type: types.INIT_USER_SUCCESS, payload: init.data[0] },
+      { type: types.ACCEPT_FRIENDSHIP_SUCCESS, payload: user },
+    );
   } catch (e) {
     yield put({ type: types.ACCEPT_FRIENDSHIP_FAILED, message: e.message });
   }

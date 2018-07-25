@@ -7,7 +7,6 @@ import socketIOClient from "socket.io-client";
 import field, { required } from "../../shared/validation";
 import "./index.css";
 import { loginUser } from "../../actions";
-import history from "../../history";
 
 let LoginForm = (props) => {
   const { handleSubmit, userError } = props;
