@@ -82,6 +82,9 @@ function* newPost({ payload }) {
 function* createUser({ payload }) {
   try {
     const user = yield call(createUserApi, payload);
+    if (user.data.message) {
+      yield put({ type: types.CREATE_USER_FAILED});
+    }
     yield put({ type: types.CREATE_USER_SUCCESS, user: user });
   } catch (e) {
     yield put({ type: types.CREATE_USER_FAILED, message: e.message });
@@ -145,7 +148,6 @@ function* acceptFriendship(data) {
 }
 
 const acceptFriendshipApi = (data) => {
-  console.log("--- ", data);
   return axios
     .post("/api/confirm_friend", data)
     .then((response) => {

@@ -80,49 +80,34 @@ class Registration extends Component {
   state = {
     notMatch: false,
     endpoint: "http://127.0.0.1:5000",
-    userExists: false
   };
 
-
-  componentDidMount() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on("userExists", (data) => {
-      if (data) {
-        console.log("--- ", data);
-        this.setState({
-          userExists: true
-        })
-      } else {
-        this.setState({
-          userExists: false
-        })
-      }
-    })
-  }
- 
-
   submit = (data) => {
-    if (data.password === data.password_repeat && !this.state.userExists) {
+    if (data.password === data.password_repeat) {
       this.setState({
         notMatch: false,
-        userExists: false
       });
       this.props.createUser(data);
-      history.push("/login");
     } else {
       this.setState({
         notMatch: true,
       });
     }
+
+    const {error} = this.props.user;
+    if (error !== true && error !== undefined) {
+      this.setState({
+        notMatch: false,
+      });
+      history.push("/login")
+    }
   };
 
   render() {
-    console.log("--- ", this.state.userExists);
     return (
       <div className="registration">
         <RegistrationForm
           passMatch={this.state.notMatch}
-          userExists={this.state.userExists}
           onSubmit={this.submit}
         />
       </div>
@@ -131,7 +116,9 @@ class Registration extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    user : state.user
+  };
 }
 
 export default withRouter(

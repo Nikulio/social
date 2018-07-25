@@ -11,7 +11,7 @@ Router.route("/add").post(function(req, res) {
         bcrypt.hash(req.body.password, 10, function(err, hash) {
           req.body.password = hash;
           UserSchema.create(req.body).then((data) => {
-            res.json(data);
+            res.send(data);
           });
         });
       } else {
